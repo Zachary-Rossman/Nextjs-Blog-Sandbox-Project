@@ -1,13 +1,25 @@
 "use client";
 
+import { useState } from "react";
+
 export default function HomePage() {
-  function handleButtonClick() {
-    console.log("Button clicked!");
+  const [showBio, setShowBio] = useState(false);
+
+  function handleToggle() {
+    setShowBio(!showBio);
   }
 
   return (
-    <button onClick={handleButtonClick}>
-      Click Me
-    </button>
+    <main>
+      <button onClick={handleToggle}>
+        Toggle Bio
+      </button>
+
+      {showBio && (
+        <p>
+          I am learning React and Next.js.
+        </p>
+      )}
+    </main>
   );
 }
