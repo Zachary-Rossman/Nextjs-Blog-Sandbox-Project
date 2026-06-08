@@ -1,25 +1,18 @@
-"use client";
+export default async function Page() {
 
-import { useState } from "react";
+  const res = await fetch(
+    "https://jsonplaceholder.typicode.com/users"
+  );
 
-export default function HomePage() {
-  const [showBio, setShowBio] = useState(false);
-
-  function handleToggle() {
-    setShowBio(!showBio);
-  }
+  const users = await res.json();
 
   return (
-    <main>
-      <button onClick={handleToggle}>
-        Toggle Bio
-      </button>
-
-      {showBio && (
-        <p>
-          I am learning React and Next.js.
+    <div>
+      {users.map(user => (
+        <p key={user.id}>
+          {user.name}
         </p>
-      )}
-    </main>
+      ))}
+    </div>
   );
 }
