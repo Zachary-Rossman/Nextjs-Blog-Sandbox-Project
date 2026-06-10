@@ -1,18 +1,29 @@
-export default async function Page() {
+"use client";
 
-  const res = await fetch(
-    "https://jsonplaceholder.typicode.com/users"
-  );
+import { useEffect, useState } from "react";
 
-  const users = await res.json();
+export default function Page() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    async function getPosts() {
+      const res = await fetch("/api/test");
+      const data = await res.json();
+
+      setPosts(data);
+    }
+
+    getPosts();
+  }, []);
 
   return (
     <div>
-      {users.map(user => (
-        <p key={user.id}>
-          {user.name}
-        </p>
-      ))}
-    </div>
-  );
-}
+      {posts.map((post) => (
+        <div key={post._id}>
+          <h2>{post.title}</h2>
+          <p>{post.author}</p>
+          </div>
+        ))}
+        </div>
+        );
+      }
